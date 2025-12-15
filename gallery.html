@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Rewall Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .gallery-header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #e0e7ff 0%, #cffafe 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-placeholder {
+            font-size: 3em;
+            color: #999;
+            text-align: center;
+        }
+
+        .project-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .project-description {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            flex: 1;
+        }
+
+        .wall-types {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .wall-tag {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .wall-tag:hover {
+            background: #764ba2;
+        }
+
+        .wall-tag.brick {
+            background: #d87d4a;
+        }
+
+        .wall-tag.brick:hover {
+            background: #c46935;
+        }
+
+        .wall-tag.stone {
+            background: #8b7355;
+        }
+
+        .wall-tag.stone:hover {
+            background: #6b5344;
+        }
+
+        .wall-tag.concrete {
+            background: #5a6c7d;
+        }
+
+        .wall-tag.concrete:hover {
+            background: #3f4b57;
+        }
+
+        .wall-tag.modern {
+            background: #764ba2;
+        }
+
+        .wall-tag.modern:hover {
+            background: #5a3a7d;
+        }
+
+        .wall-tag.vintage {
+            background: #d4a574;
+        }
+
+        .wall-tag.vintage:hover {
+            background: #c08f5f;
+        }
+
+        /* Lightbox Modal Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            animation: slideUp 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-content {
+                max-width: 95%;
+                padding: 20px;
+            }
+        }
+
+        .lightbox-image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 60vh;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+
+        .lightbox-info {
+            margin-bottom: 20px;
+        }
+
+        .lightbox-title {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .lightbox-description {
+            color: #666;
+            font-size: 1em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .lightbox-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2em;
+            color: #333;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            color: #667eea;
+        }
+
+        .prev-btn, .next-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 1.5em;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .prev-btn:hover, .next-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .prev-btn {
+            left: 10px;
+        }
+
+        .next-btn {
+            right: 10px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-header h1 {
+                font-size: 2em;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .project-image {
+                height: 180px;
+            }
+
+            .lightbox-content {
+                border-radius: 8px;
+            }
+
+            .prev-btn, .next-btn {
+                padding: 12px 16px;
+                font-size: 1.2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            .gallery-header h1 {
+                font-size: 1.5em;
+            }
+
+            .gallery-header p {
+                font-size: 1em;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .project-image {
+                height: 150px;
+            }
+
+            .lightbox-content {
+                padding: 15px;
+            }
+
+            .lightbox-title {
+                font-size: 1.5em;
+            }
+
+            .prev-btn, .next-btn {
+                padding: 10px 12px;
+                font-size: 1em;
+            }
+
+            .close-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="gallery-header">
+            <h1>Project Gallery</h1>
+            <p>Explore our stunning wall renovation projects</p>
+        </div>
+
+        <div class="gallery-grid" id="gallery">
+            <!-- Project cards will be generated here -->
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="close-btn" id="closeBtn">&times;</button>
+            <button class="prev-btn" id="prevBtn">&lt;</button>
+            <button class="next-btn" id="nextBtn">&gt;</button>
+
+            <div class="lightbox-image-container">
+                <img src="" alt="" class="lightbox-image" id="lightboxImage">
+            </div>
+
+            <div class="lightbox-info">
+                <h2 class="lightbox-title" id="lightboxTitle"></h2>
+                <p class="lightbox-description" id="lightboxDescription"></p>
+                <div class="lightbox-tags" id="lightboxTags"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample project data
+        const projects = [
+            {
+                id: 1,
+                name: "Modern Brick Restoration",
+                description: "Complete restoration of a historic brick facade with modern finishing touches. Preserved original character while adding contemporary elements.",
+                image: "https://via.placeholder.com/400x300?text=Project+1",
+                wallTypes: ["brick", "modern"]
+            },
+            {
+                id: 2,
+                name: "Stone Wall Renovation",
+                description: "Stunning transformation of an old stone wall into a feature wall. Applied eco-friendly sealant and accent lighting.",
+                image: "https://via.placeholder.com/400x300?text=Project+2",
+                wallTypes: ["stone", "vintage"]
+            },
+            {
+                id: 3,
+                name: "Industrial Concrete Finish",
+                description: "Contemporary concrete wall treatment perfect for modern homes and commercial spaces. Polished for a sleek, professional look.",
+                image: "https://via.placeholder.com/400x300?text=Project+3",
+                wallTypes: ["concrete", "modern"]
+            },
+            {
+                id: 4,
+                name: "Vintage Brick Accent Wall",
+                description: "Reclaimed brick installation creating a warm, rustic accent wall. Ideal for living rooms and bedrooms seeking character.",
+                image: "https://via.placeholder.com/400x300?text=Project+4",
+                wallTypes: ["brick", "vintage"]
+            },
+            {
+                id: 5,
+                name: "Textured Stone Wall",
+                description: "Hand-finished stone wall with custom texture and staining. Creates depth and visual interest in any interior space.",
+                image: "https://via.placeholder.com/400x300?text=Project+5",
+                wallTypes: ["stone", "modern"]
+            },
+            {
+                id: 6,
+                name: "Concrete Accent Feature",
+                description: "Decorative concrete wall treatment with geometric patterns. Perfect for modern minimalist and industrial design aesthetics.",
+                image: "https://via.placeholder.com/400x300?text=Project+6",
+                wallTypes: ["concrete"]
+            },
+            {
+                id: 7,
+                name: "Classic Brick Heritage",
+                description: "Restoration of heritage brick walls maintaining historical integrity. Professional cleaning and repointing throughout.",
+                image: "https://via.placeholder.com/400x300?text=Project+7",
+                wallTypes: ["brick"]
+            },
+            {
+                id: 8,
+                name: "Contemporary Stone Panel",
+                description: "Modern stone panel installation with LED accent lighting. Transforms any space into a sophisticated gallery-like setting.",
+                image: "https://via.placeholder.com/400x300?text=Project+8",
+                wallTypes: ["stone", "modern"]
+            },
+            {
+                id: 9,
+                name: "Polished Concrete Showroom",
+                description: "High-end polished concrete walls for commercial showroom. Seamless finish with integrated branding opportunities.",
+                image: "https://via.placeholder.com/400x300?text=Project+9",
+                wallTypes: ["concrete", "modern"]
+            },
+            {
+                id: 10,
+                name: "Rustic Stone Cottage",
+                description: "Charming stone wall restoration for country cottage. Traditional techniques combined with modern durability standards.",
+                image: "https://via.placeholder.com/400x300?text=Project+10",
+                wallTypes: ["stone", "vintage"]
+            }
+        ];
+
+        let currentIndex = 0;
+
+        // Initialize gallery
+        function initGallery() {
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = projects.map((project, index) => `
+                <div class="project-card" onclick="openLightbox(${index})">
+                    <div class="project-image">
+                        <img src="${project.image}" alt="${project.name}">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-name">${project.name}</h3>
+                        <p class="project-description">${project.description}</p>
+                        <div class="wall-types">
+                            ${project.wallTypes.map(type => `
+                                <span class="wall-tag ${type}">${capitalizeFirst(type)}</span>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Open lightbox
+        function openLightbox(index) {
+            currentIndex = index;
+            updateLightbox();
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close lightbox
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Update lightbox content
+        function updateLightbox() {
+            const project = projects[currentIndex];
+            document.getElementById('lightboxImage').src = project.image;
+            document.getElementById('lightboxImage').alt = project.name;
+            document.getElementById('lightboxTitle').textContent = project.name;
+            document.getElementById('lightboxDescription').textContent = project.description;
+
+            const tagsHtml = project.wallTypes.map(type => `
+                <span class="wall-tag ${type}">${capitalizeFirst(type)}</span>
+            `).join('');
+            document.getElementById('lightboxTags').innerHTML = tagsHtml;
+        }
+
+        // Navigate lightbox
+        function nextProject() {
+            currentIndex = (currentIndex + 1) % projects.length;
+            updateLightbox();
+        }
+
+        function prevProject() {
+            currentIndex = (currentIndex - 1 + projects.length) % projects.length;
+            updateLightbox();
+        }
+
+        // Utility function
+        function capitalizeFirst(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        // Event listeners
+        document.getElementById('closeBtn').addEventListener('click', closeLightbox);
+        document.getElementById('nextBtn').addEventListener('click', nextProject);
+        document.getElementById('prevBtn').addEventListener('click', prevProject);
+
+        // Close lightbox on background click
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') {
+                closeLightbox();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox.classList.contains('active')) return;
+
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') nextProject();
+            if (e.key === 'ArrowLeft') prevProject();
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initGallery);
+    </script>
+</body>
+</html>
