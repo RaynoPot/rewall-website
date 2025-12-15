@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ReWall - Premium retaining wall solutions from design to delivery. Expert engineering, complete solutions, and smart tools.">
+    <meta name="keywords" content="retaining walls, wall solutions, engineering design, construction">
+    <meta property="og:title" content="ReWall - Any Wall, Anywhere">
+    <meta property="og:description" content="Premium retaining wall solutions tailored to your needs">
+    <meta property="og:type" content="website">
+    <title>Home - ReWall | Premium Retaining Wall Solutions</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #89CFF0 0%, #b3dff0 100%);
+            padding: 80px 20px;
+            text-align: center;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-animation-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            color: #2C3E50;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background-color: #4A90A4;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(74, 144, 164, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #2C3E50;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(74, 144, 164, 0.4);
+            text-decoration: none;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #4A90A4;
+            padding: 15px 40px;
+            border: 2px solid #4A90A4;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #4A90A4;
+            color: white;
+            text-decoration: none;
+            transform: translateY(-3px);
+        }
+
+        /* Value Propositions */
+        .value-props-section {
+            padding: 80px 20px;
+            background-color: #ffffff;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+
+        .value-props-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .value-prop-card {
+            background: #E8F4F8;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .value-prop-card:hover {
+            border-color: #4A90A4;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(74, 144, 164, 0.2);
+        }
+
+        .value-prop-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .value-prop-card h3 {
+            font-size: 1.5rem;
+            color: #2C3E50;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .value-prop-card p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Featured Projects */
+        .featured-projects-section {
+            padding: 80px 20px;
+            background-color: #f5f5f5;
+        }
+
+        .featured-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .featured-project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .featured-project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .featured-project-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #89CFF0 0%, #b3dff0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 3rem;
+        }
+
+        .featured-project-content {
+            padding: 25px;
+        }
+
+        .featured-project-content h3 {
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .featured-project-content p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .project-badge {
+            display: inline-block;
+            background-color: #4A90A4;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Trust Bar */
+        .trust-section {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #2C3E50 0%, #1a1a1a 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .trust-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .trust-title {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #89CFF0;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .trust-item {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .trust-item h4 {
+            color: #89CFF0;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .trust-item p {
+            color: #ddd;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #4A90A4 0%, #2C3E50 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #89CFF0;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #fff;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn-primary {
+            background-color: #89CFF0;
+            color: #1a1a1a;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn-primary:hover {
+            background-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+
+        .cta-btn-secondary {
+            background-color: transparent;
+            color: #89CFF0;
+            padding: 15px 40px;
+            border: 2px solid #89CFF0;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn-secondary:hover {
+            background-color: #89CFF0;
+            color: #1a1a1a;
+            text-decoration: none;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            color: #89CFF0;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #89CFF0;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            text-align: center;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav style="background-color: #1a1a1a; padding: 20px; text-align: center; border-bottom: 1px solid #333;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <a href="index.html" style="color: #89CFF0; font-size: 1.5rem; font-weight: 700; text-decoration: none;">R:Wall</a>
+            <ul style="list-style: none; display: flex; gap: 30px; flex-wrap: wrap; justify-content: center;">
+                <li><a href="index.html" style="color: white; text-decoration: none; transition: color 0.3s;">Home</a></li>
+                <li><a href="about.html" style="color: white; text-decoration: none; transition: color 0.3s;">About</a></li>
+                <li><a href="services.html" style="color: white; text-decoration: none; transition: color 0.3s;">Services</a></li>
+                <li><a href="gallery.html" style="color: white; text-decoration: none; transition: color 0.3s;">Gallery</a></li>
+                <li><a href="blog.html" style="color: white; text-decoration: none; transition: color 0.3s;">Blog</a></li>
+                <li><a href="contact.html" style="color: white; text-decoration: none; transition: color 0.3s;">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <svg class="hero-animation-svg" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" data-animate="draw">
+            <line x1="100" y1="0" x2="100" y2="600" stroke="#2C3E50" stroke-width="2"/>
+            <line x1="200" y1="0" x2="200" y2="600" stroke="#2C3E50" stroke-width="2"/>
+            <line x1="300" y1="0" x2="300" y2="600" stroke="#2C3E50" stroke-width="2"/>
+            <line x1="400" y1="0" x2="400" y2="600" stroke="#2C3E50" stroke-width="2"/>
+            <line x1="500" y1="0" x2="500" y2="600" stroke="#2C3E50" stroke-width="2"/>
+            <line x1="600" y1="0" x2="600" y2="600" stroke="#2C3E50" stroke-width="2"/>
+            <line x1="700" y1="0" x2="700" y2="600" stroke="#2C3E50" stroke-width="2"/>
+        </svg>
+
+        <div class="hero-content">
+            <h1>Re:Wall – Any Wall, Anywhere</h1>
+            <p>Premium retaining wall solutions from design to delivery</p>
+            <div class="hero-buttons">
+                <a href="contact.html" class="btn-primary">Request a Quote</a>
+                <a href="https://databloc.nz" target="_blank" class="btn-secondary">Plan Your Wall</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Propositions -->
+    <section class="value-props-section">
+        <div class="section-container">
+            <h2 class="section-title">Why Choose ReWall</h2>
+            <div class="value-props-grid">
+                <div class="value-prop-card">
+                    <div class="value-prop-icon">🏗️</div>
+                    <h3>Expert Engineering</h3>
+                    <p>Backed by Nemean Engineering, we bring professional expertise to every project. Our engineering-first approach ensures durability and compliance.</p>
+                </div>
+                <div class="value-prop-card">
+                    <div class="value-prop-icon">✓</div>
+                    <h3>Complete Solutions</h3>
+                    <p>From project management to construction, we handle everything. Or choose à la carte services tailored to your specific needs.</p>
+                </div>
+                <div class="value-prop-card">
+                    <div class="value-prop-icon">💡</div>
+                    <h3>Smart Tools</h3>
+                    <p>Access Data Bloc's digital planning tools. Design your wall, get instant calculations, and request quotes—all in one platform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="featured-projects-section">
+        <div class="section-container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="featured-projects-grid">
+                <div class="featured-project-card">
+                    <div class="featured-project-image">
+                        <!-- Image: /images/project1.png -->
+                        📸
+                    </div>
+                    <div class="featured-project-content">
+                        <h3>Project Name</h3>
+                        <p>Brief description of the project and the solution delivered.</p>
+                        <span class="project-badge">Retaining Wall</span>
+                    </div>
+                </div>
+                <div class="featured-project-card">
+                    <div class="featured-project-image">
+                        <!-- Image: /images/project2.png -->
+                        📸
+                    </div>
+                    <div class="featured-project-content">
+                        <h3>Project Name</h3>
+                        <p>Brief description of the project and the solution delivered.</p>
+                        <span class="project-badge">Retaining Wall</span>
+                    </div>
+                </div>
+                <div class="featured-project-card">
+                    <div class="featured-project-image">
+                        <!-- Image: /images/project3.png -->
+                        📸
+                    </div>
+                    <div class="featured-project-content">
+                        <h3>Project Name</h3>
+                        <p>Brief description of the project and the solution delivered.</p>
+                        <span class="project-badge">Retaining Wall</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <section class="trust-section">
+        <div class="trust-content">
+            <h2 class="trust-title">Trusted by Builders & Homeowners</h2>
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <h4>Service Areas</h4>
+                    <p>Cambridge, Auckland, North Waikato, Franklin</p>
+                </div>
+                <div class="trust-item">
+                    <h4>Engineering Partner</h4>
+                    <p>Nemean Engineering – Professional expertise & compliance</p>
+                </div>
+                <div class="trust-item">
+                    <h4>Technology Partner</h4>
+                    <p>Data Bloc – Digital tools & smart planning</p>
+                </div>
+                <div class="trust-item">
+                    <h4>Trusted Contractor</h4>
+                    <p>Fine Way Earthmovers – Professional construction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Transform Your Wall?</h2>
+            <p>Get started with a free consultation and personalized quote today.</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="cta-btn-primary">Request a Quote</a>
+                <a href="services.html" class="cta-btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="gallery.html">Projects</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="https://databloc.nz" target="_blank">Planning Tool</a></li>
+                    <li><a href="https://nemean.nz" target="_blank">Engineering</a></li>
+                    <li><a href="https://finewayearthmovers.co.nz" target="_blank">Contractor</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:info@databloc.nz">info@databloc.nz</a></li>
+                    <li><a href="tel:+642739414127">027 394 1127</a></li>
+                    <li><a href="contact.html">Contact Form</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ReWall. All rights reserved. | <a href="#" style="color: #99a;">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>
