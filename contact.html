@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Rewall</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+
+        .honeypot {
+            display: none;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .info-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-section h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .info-block {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .info-block:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .info-block h3 {
+            color: #764ba2;
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .info-block p {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-block a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .info-block a:hover {
+            color: #764ba2;
+        }
+
+        .service-areas {
+            background: #f0f4ff;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        .service-areas h4 {
+            color: #667eea;
+            margin-bottom: 0.75rem;
+        }
+
+        .service-areas ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .service-areas li {
+            padding: 0.25rem 0;
+            color: #666;
+        }
+
+        .service-areas li::before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error-message {
+            display: none;
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            border: 1px solid #f5c6cb;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Contact Rewall</h1>
+        <p>Get in touch with our team today</p>
+    </header>
+
+    <div class="container">
+        <div class="content-wrapper">
+            <!-- Contact Form -->
+            <div class="form-section">
+                <h2>Send us a Message</h2>
+                
+                <div class="success-message" id="successMessage">
+                    ✓ Thank you! We've received your message. We'll get back to you soon.
+                </div>
+                
+                <div class="error-message" id="errorMessage">
+                    ✗ Something went wrong. Please try again.
+                </div>
+
+                <form name="contact" method="POST" netlify netlify-honeypot="bot-field">
+                    <!-- Honeypot field for spam protection -->
+                    <div class="form-group honeypot">
+                        <label for="botfield">Don't fill this out if you're human</label>
+                        <input type="text" id="botfield" name="bot-field">
+                    </div>
+
+                    <!-- Name Field -->
+                    <div class="form-group">
+                        <label for="name" class="required">Name</label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            required 
+                            placeholder="Your full name"
+                        >
+                    </div>
+
+                    <!-- Email Field -->
+                    <div class="form-group">
+                        <label for="email" class="required">Email</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            required 
+                            placeholder="your.email@example.com"
+                        >
+                    </div>
+
+                    <!-- Phone Field -->
+                    <div class="form-group">
+                        <label for="phone" class="required">Phone</label>
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            name="phone" 
+                            required 
+                            placeholder="(123) 456-7890"
+                        >
+                    </div>
+
+                    <!-- Project Type Dropdown -->
+                    <div class="form-group">
+                        <label for="project-type" class="required">Project Type</label>
+                        <select id="project-type" name="project-type" required>
+                            <option value="">Select a project type...</option>
+                            <option value="residential">Residential</option>
+                            <option value="commercial">Commercial</option>
+                            <option value="industrial">Industrial</option>
+                            <option value="renovation">Renovation</option>
+                            <option value="consultation">Consultation</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <!-- Message Field -->
+                    <div class="form-group">
+                        <label for="message" class="required">Message</label>
+                        <textarea 
+                            id="message" 
+                            name="message" 
+                            required 
+                            placeholder="Tell us about your project..."
+                        ></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="info-section">
+                <h2>Contact Information</h2>
+
+                <div class="info-block">
+                    <h3>📞 Phone</h3>
+                    <p>
+                        <a href="tel:+1234567890">(123) 456-7890</a>
+                    </p>
+                    <p style="font-size: 0.9rem; color: #999;">Available Monday-Friday, 9am-6pm</p>
+                </div>
+
+                <div class="info-block">
+                    <h3>📧 Email</h3>
+                    <p>
+                        <a href="mailto:info@rewall.com">info@rewall.com</a>
+                    </p>
+                    <p style="font-size: 0.9rem; color: #999;">We typically respond within 24 hours</p>
+                </div>
+
+                <div class="info-block">
+                    <h3>📍 Office Hours</h3>
+                    <p><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM</p>
+                    <p><strong>Saturday:</strong> 10:00 AM - 4:00 PM</p>
+                    <p><strong>Sunday:</strong> Closed</p>
+                </div>
+
+                <div class="info-block">
+                    <h3>🌍 Service Areas</h3>
+                    <div class="service-areas">
+                        <h4>We serve the following regions:</h4>
+                        <ul>
+                            <li>Greater Metropolitan Area</li>
+                            <li>Northern Region</li>
+                            <li>Eastern Suburbs</li>
+                            <li>Western Districts</li>
+                            <li>Central Business District</li>
+                            <li>Coastal Communities</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-block">
+                    <h3>💼 Follow Us</h3>
+                    <p>
+                        <a href="https://facebook.com/rewall" target="_blank">Facebook</a> | 
+                        <a href="https://twitter.com/rewall" target="_blank">Twitter</a> | 
+                        <a href="https://linkedin.com/company/rewall" target="_blank">LinkedIn</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Rewall. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Handle form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const botField = document.getElementById('botfield').value;
+            
+            // If honeypot field is filled, treat it as spam
+            if (botField.trim() !== '') {
+                e.preventDefault();
+                console.warn('Spam detected');
+                return false;
+            }
+        });
+
+        // Reset messages on form interaction
+        const form = document.querySelector('form');
+        const inputs = form.querySelectorAll('input, select, textarea');
+        
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                document.getElementById('successMessage').style.display = 'none';
+                document.getElementById('errorMessage').style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
